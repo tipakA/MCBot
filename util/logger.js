@@ -11,7 +11,6 @@ const colors = {
   dark_green: '#00AA00',
   dark_purple: '#AA00AA',
   dark_red: '#AA0000',
-  default: '#ffffff',
   gold: '#FFAA00',
   gray: '#AAAAAA',
   green: '#55FF55',
@@ -24,8 +23,10 @@ const colors = {
 
 function log(data) {
   let output = '';
-  for (const part of data.extra) {
-    output += `${chalk.hex(colors[part.color || 'default'])(part.text)}`;
+  let textData = data.extra;
+  if (!textData) textData = data.with;
+  for (const part of textData) {
+    output += `${chalk.hex(colors[part.color || 'white'])(part.text)}`;
   }
   return output;
 }
