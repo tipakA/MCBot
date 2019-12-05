@@ -26,7 +26,7 @@ function log(data) {
   let textData = data.extra;
   if (!textData) textData = data.with;
   for (const part of textData) {
-    output += `${chalk.hex(colors[part.color || 'white'])(part.text)}`;
+    output += chalk.hex(colors[part.color || 'white'])(part.text);
   }
   return output;
 }
