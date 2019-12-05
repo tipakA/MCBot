@@ -3,6 +3,9 @@ const version = '1.12.2';
 const mcdata = require('minecraft-data')(version);
 const item = require('prismarine-item')(version);
 require('dotenv').config();
+
+const log = require('./util/logger.js');
+
 const client = mineflayer.createBot({
   host: process.env.HOST,
   port: process.env.HOST_PORT,
@@ -26,6 +29,7 @@ client.on('whisper', (username, message) => {
 
 client.on('message', raw => {
   console.log('Raw message:', raw);
+  console.log('Raw message:', log(raw));
 });
 
 client.on('error', console.error);
