@@ -1,0 +1,29 @@
+{
+  "name": "mcbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mcbot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tipakA/MCbot.git"
+  },
+  "author": "tipakA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tipakA/MCbot/issues"
+  },
+  "homepage": "https://github.com/tipakA/MCbot#readme",
+  "dependencies": {
+    "minecraft-data": "^2.39.1",
+    "mineflayer": "^2.10.0",
+    "mineflayer-auto-auth": "^1.0.0",
+    "mineflayer-blockfinder": "0.0.7",
+    "mineflayer-navigate": "0.0.10",
+    "mineflayer-scaffold": "^1.0.0",
+    "mineflayer-tps": "^1.0.0",
+    "prismarine-item": "^1.1.1"
+  }
+}
