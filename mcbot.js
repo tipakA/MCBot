@@ -1,4 +1,5 @@
 const mineflayer = require('mineflayer');
+const { promisify: prom } = require('util');
 const version = '1.12.2';
 const mcdata = require('minecraft-data')(version);
 const item = require('prismarine-item')(version);
@@ -16,6 +17,8 @@ const client = mineflayer.createBot({
   version,
 });
 
+const p = func => prom(client[func]);
+
 client.on('login', () => {
   console.log(`Logged in as ${client.username}`);
 });
@@ -25,7 +28,7 @@ client.on('chat', (username, message, _, raw) => {
   console.log(`${username}: ${message} || ${raw}`);
 });
 
-client.on('whisper', (username, message) => {
+client.on('whisper', async (username, message) => {
   if (username === client.username) return;
   console.log(`${username} whispers: ${message}`);
 
@@ -37,7 +40,7 @@ client.on('whisper', (username, message) => {
 
   if (command === 'stop') {
     if (username !== botAccess[0]) return client.whisper(username, `§c${username}, §4Nie masz dostępu do tej komendy.`);
-    client.whisper(username, '§6Shutting down...');
+    await p('whisper')(username, '§6Shutting down...');
     return process.exit(0);
   }
 });
