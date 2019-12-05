@@ -6,6 +6,9 @@ require('dotenv').config();
 
 const log = require('./util/logger.js');
 
+const botAccess = ['tipakA'];
+const prefix = '!';
+
 const client = mineflayer.createBot({
   host: process.env.HOST,
   port: process.env.HOST_PORT,
@@ -25,6 +28,13 @@ client.on('chat', (username, message, _, raw) => {
 client.on('whisper', (username, message) => {
   if (username === client.username) return;
   console.log(`${username} whispers: ${message}`);
+
+  if (!botAccess.includes(username)) return;
+  if (!message.startsWith(prefix)) return;
+
+  const args = message.slice(prefix.length).split(/ +/g);
+  const command = args.shift().toLowerCase();
+
 });
 
 client.on('message', raw => {
