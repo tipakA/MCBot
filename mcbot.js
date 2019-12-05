@@ -14,14 +14,18 @@ client.on('login', () => {
   console.log(`Logged in as ${client.username}`);
 });
 
-client.on('chat', (username, message) => {
+client.on('chat', (username, message, _, raw) => {
   if (username === client.username) return;
-  console.log(`${username}: ${message}`);
+  console.log(`${username}: ${message} || ${raw}`);
 });
 
 client.on('whisper', (username, message) => {
   if (username === client.username) return;
   console.log(`${username} whispers: ${message}`);
+});
+
+client.on('message', raw => {
+  console.log('Raw message:', raw);
 });
 
 client.on('error', console.error);
