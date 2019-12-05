@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/tipakA/MCbot#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "minecraft-data": "^2.39.1",
     "mineflayer": "^2.10.0",
     "mineflayer-auto-auth": "^1.0.0",
