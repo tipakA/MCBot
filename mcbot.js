@@ -39,8 +39,9 @@ client.on('whisper', async (username, message) => {
   const command = args.shift().toLowerCase();
 
   if (command === 'stop') {
-    if (username !== botAccess[0]) return client.whisper(username, `§c${username}, §4Nie masz dostępu do tej komendy.`);
-    await p('whisper')(username, '§6Shutting down...');
+    if (username !== botAccess[0]) return client.whisper(username, 'Nie masz dostępu do tej komendy.');
+    client.whisper(username, 'Shutting down...');
+    await p('quit')('Process stopped');
     return process.exit(0);
   }
 });
