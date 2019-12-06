@@ -38,12 +38,9 @@ client.on('whisper', async (username, message) => {
   const args = message.slice(prefix.length).split(/ +/g);
   const command = args.shift().toLowerCase();
 
-  if (command === 'stop') {
-    if (username !== botAccess[0]) return client.whisper(username, 'Nie masz dostępu do tej komendy.');
-    client.whisper(username, 'Shutting down...');
-    await client.p('quit')('Process stopped');
-    return process.exit(0);
-  }
+  if (!client.commands.has(command)) return;
+
+  client.commands.get(command).run(client, username, args);
 });
 
 client.on('message', raw => {
