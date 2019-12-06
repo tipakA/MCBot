@@ -5,8 +5,6 @@ const mcdata = require('minecraft-data')(version);
 const item = require('prismarine-item')(version);
 require('dotenv').config();
 
-const log = require('./util/logger.js');
-
 const botAccess = ['tipakA'];
 const prefix = '!';
 
@@ -17,7 +15,9 @@ const client = mineflayer.createBot({
   version,
 });
 
-const p = func => prom(client[func]);
+client.log = require('./util/logger.js');
+client.p = func => prom(client[func]);
+client.commands = require('./util/commandLoader.js')(client);
 
 client.on('login', () => {
   console.log(`Logged in as ${client.username}`);
@@ -41,14 +41,14 @@ client.on('whisper', async (username, message) => {
   if (command === 'stop') {
     if (username !== botAccess[0]) return client.whisper(username, 'Nie masz dostępu do tej komendy.');
     client.whisper(username, 'Shutting down...');
-    await p('quit')('Process stopped');
+    await client.p('quit')('Process stopped');
     return process.exit(0);
   }
 });
 
 client.on('message', raw => {
   console.log('Raw message:', raw);
-  console.log('Raw message:', log(raw));
+  console.log('Raw message:', client.log(raw));
 });
 
 client.on('error', console.error);
