@@ -42,7 +42,7 @@ client.on('whisper', async (username, message) => {
 
   if (command.info.access && command.info.access === 'owner' && username !== botAccess[0]) return client.whisper(username, 'Ta komanda jest tylko dla właściciela.');
 
-  client.commands.get(command).run(client, username, args);
+  command.run(client, username, args);
 });
 
 client.on('message', raw => {
