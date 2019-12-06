@@ -13,7 +13,7 @@ async function loader(client, loadAll = true, command) {
     for (const cmdName of commandList) {
       try {
         const cmd = require(`../commands/${cmdName}`);
-        commands.set(cmd.info.name, cmd.run);
+        commands.set(cmd.info.name, cmd);
         console.log(cmd.info.name, 'loaded'); // TODO Rewrite logger to allow human readable format, eventually split on 2 loggers.
       } catch (err) {
         client.log({ extra: [{ color: 'dark_red', text: 'ERROR' }, { color: 'red', text: `Error while loading command ${cmdName}: ${err.message}` }] });
