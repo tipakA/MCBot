@@ -17,10 +17,10 @@ const client = mineflayer.createBot({
 
 client.log = require('./util/logger.js');
 client.p = func => prom(client[func]);
-client.commands = require('./util/commandLoader.js')(client);
 
-client.on('login', () => {
+client.on('login', async () => {
   console.log(`Logged in as ${client.username}`);
+  client.commands = await require('./util/commandLoader.js')(client);
 });
 
 client.on('chat', (username, message, _, raw) => {
@@ -38,7 +38,7 @@ client.on('whisper', async (username, message) => {
   const args = message.slice(prefix.length).split(/ +/g);
   const cmd = args.shift().toLowerCase();
   const command = client.commands.get(cmd);
-  if (command) return;
+  if (!command) return;
 
   if (command.info.access && command.info.access === 'owner' && username !== botAccess[0]) return client.whisper(username, 'Ta komanda jest tylko dla właściciela.');
 
