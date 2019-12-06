@@ -1,4 +1,4 @@
-async function stopCommand(client, username, args) {
+async function stopCommand(client, username, args) { /* eslint-disable-line no-unused-vars */
   if (username !== 'tipakA') return client.whisper(username, 'Nie masz dostępu do tej komendy.');
   client.whisper(username, 'Shutting down...');
   await client.p('quit')('Process stopped');

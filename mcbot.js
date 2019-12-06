@@ -1,8 +1,8 @@
 const mineflayer = require('mineflayer');
 const { promisify: prom } = require('util');
 const version = '1.12.2';
-const mcdata = require('minecraft-data')(version);
-const item = require('prismarine-item')(version);
+const mcdata = require('minecraft-data')(version); /* eslint-disable-line no-unused-vars */
+const item = require('prismarine-item')(version); /* eslint-disable-line no-unused-vars */
 require('dotenv').config();
 
 const botAccess = ['tipakA'];
@@ -20,7 +20,7 @@ client.p = func => prom(client[func]);
 
 client.on('login', async () => {
   console.log(`Logged in as ${client.username}`);
-  client.commands = await require('./util/commandLoader.js')(client);
+  client.commands = await require('./util/commandLoader.js')(client); /* eslint-disable-line global-require, require-atomic-updates */
 });
 
 client.on('chat', (username, message, _, raw) => {
@@ -28,7 +28,7 @@ client.on('chat', (username, message, _, raw) => {
   console.log(`${username}: ${message} || ${raw}`);
 });
 
-client.on('whisper', async (username, message) => {
+client.on('whisper', (username, message) => {
   if (username === client.username) return;
   console.log(`${username} whispers: ${message}`);
 
