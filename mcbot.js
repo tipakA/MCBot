@@ -36,9 +36,11 @@ client.on('whisper', async (username, message) => {
   if (!message.startsWith(prefix)) return;
 
   const args = message.slice(prefix.length).split(/ +/g);
-  const command = args.shift().toLowerCase();
+  const cmd = args.shift().toLowerCase();
+  const command = client.commands.get(cmd);
+  if (command) return;
 
-  if (!client.commands.has(command)) return;
+  if (command.info.access && command.info.access === 'owner' && username !== botAccess[0]) return client.whisper(username, 'Ta komanda jest tylko dla właściciela.');
 
   client.commands.get(command).run(client, username, args);
 });

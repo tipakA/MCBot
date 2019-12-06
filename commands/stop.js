@@ -7,6 +7,7 @@ async function stopCommand(client, username, args) {
 
 module.exports = {
   info: {
+    access: 'owner',
     name: 'stop',
   },
   run: stopCommand,
