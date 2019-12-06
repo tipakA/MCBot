@@ -8,7 +8,7 @@ const commands = new Collection();
 
 async function loader(client, loadAll = true, command) {
   if (!loadAll && !command) return Error('loadAll was set to false, but no command was specified');
-  const commandList = await read('../commands/');
+  const commandList = await read('./commands/');
   if (loadAll) {
     for (const cmdName of commandList) {
       try {
