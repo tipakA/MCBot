@@ -9,8 +9,8 @@ async function loader(client, loadAll = true, event) {
   if (!loadAll && !event) return Error('loadAll was set to false, but no event was specified');
   const eventList = await read('./src/events/').then(files => files.filter(f => f.endsWith('.js')));
   if (loadAll) {
+    console.log(`Loading ${eventList.length} events...`);
     for (const evtName of eventList) {
-      console.log(`Loading ${eventList.length} events...`);
       try {
         const evt = require(`../events/${evtName}`);
         client.on(evt.info.name, evt.run.bind(null, client));

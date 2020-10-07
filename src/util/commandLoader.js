@@ -10,8 +10,8 @@ async function loader(client, loadAll = true, command) {
   if (!loadAll && !command) return Error('loadAll was set to false, but no command was specified');
   const commandList = await read('./src/commands/').then(files => files.filter(f => f.endsWith('.js')));
   if (loadAll) {
+    console.log(`Loading ${commandList.length} commands...`);
     for (const cmdName of commandList) {
-      console.log(`Loading ${commandList.length} commands...`);
       try {
         const cmd = require(`../commands/${cmdName}`);
         commands.set(cmd.info.name, cmd);
