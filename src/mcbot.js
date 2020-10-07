@@ -1,5 +1,6 @@
 /* eslint-disable sort-keys, global-require */
 const mineflayer = require('mineflayer');
+const Redis = require('ioredis');
 const { promisify: prom } = require('util');
 
 const config = require('./util/config.js');
@@ -20,6 +21,7 @@ const client = mineflayer.createBot({
 });
 
 async function main() {
+  client.redis = new Redis();
   client.config = config;
   client.log = require('./util/logger.js');
   client.p = func => prom(client[func]);
