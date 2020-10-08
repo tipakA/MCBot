@@ -24,6 +24,7 @@ const client = mineflayer.createBot({
 async function main() {
   client.config = config;
   client.trackingEnabled = true;
+  client.startPoint = null;
 
   client.onlinePlayers = new Collection();
   client.intervals = new Collection();
