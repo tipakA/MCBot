@@ -17,7 +17,7 @@ async function loader(client, loadAll = true, event) {
         events.push({ f: evt.run, name: evt.info.name });
         console.log('Event', evt.info.name, 'loaded'); // TODO Rewrite logger to allow human readable format, eventually split on 2 loggers.
       } catch (err) {
-        client.log({ extra: [{ color: 'dark_red', text: 'ERROR' }, { color: 'red', text: `Error while loading command ${cmdName}: ${err.message}` }] });
+        client.log({ extra: [{ color: 'dark_red', text: 'ERROR' }, { color: 'red', text: `Error while loading command ${evtName}: ${err.message}` }] });
       }
     }
     return events;
