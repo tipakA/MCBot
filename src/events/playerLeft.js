@@ -18,7 +18,9 @@ async function event(client, player) { /* eslint-disable-line no-unused-vars */
   await client.redis.set(`mc:playertime:${player.username}`, data.time);
   client.onlinePlayers.delete(player.username);
 
-  client.chat(`/scoreboard players add ${player.username} timespent ${Math.floor(toAdd / 1000)}`);
+  client.emit('xUpdateScoreboard');
+  client.intervals.get('updateScoreboard').refresh();
+  // client.chat(`/scoreboard players add ${player.username} timespent ${Math.floor(toAdd / 1000)}`);
 }
 
 module.exports = {

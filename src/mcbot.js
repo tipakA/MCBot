@@ -29,7 +29,8 @@ async function main() {
   client.intervals = new Collection();
 
   client.onlinePlayers.set(config.nickname, { username: config.nickname });
-  client.intervals.set('timeSpent', setInterval(() => client.emit('xTimeSpent'), 30000));
+  client.intervals.set('timeSpent', setInterval(() => client.emit('xTimeSpent'), 5000));
+  client.intervals.set('updateScoreboard', setInterval(() => client.emit('xUpdateScoreboard'), 900000));
 
   client.redis = new Redis();
   client.p = func => prom(client[func]);
