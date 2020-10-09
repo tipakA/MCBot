@@ -1,9 +1,19 @@
 async function event(client, playerData) { /* eslint-disable-line no-unused-vars */
   if (!client.trackingEnabled) return;
+
+  let firstCheck = false;
+
+  let time = Date.now();
+  if (client.startPoint) {
+    time = client.startPoint;
+    firstCheck = true;
+    client.startPoint = null;
+  }
+
   if (!playerData) {
     for (const [ nickname, data ] of client.onlinePlayers) {
       if (nickname === client.config.nickname) continue;
-      const diff = Date.now() - data.lastCheck; // ~10s
+      const diff = time - firstCheck ? Date.now() : data.lastCheck; // ~10s
       const offset = diff % 1000; // rest of millis from diff
 
       data.time += diff; // adding the diff to time on object

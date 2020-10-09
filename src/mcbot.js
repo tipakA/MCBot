@@ -23,16 +23,15 @@ const client = mineflayer.createBot({
 
 async function main() {
   client.config = config;
-  client.trackingEnabled = true;
+  client.trackingEnabled = false;
   client.startPoint = null;
+  client.currentSidebar = null;
 
   client.onlineCache = new Set();
   client.onlinePlayers = new Collection();
   client.intervals = new Collection();
 
   client.onlinePlayers.set(config.nickname, { username: config.nickname });
-  client.intervals.set('timeSpent', setInterval(() => client.emit('xTimeSpent'), 5000));
-  client.intervals.set('updateScoreboard', setInterval(() => client.emit('xUpdateScoreboard'), 900000));
 
   client.redis = new Redis();
   client.p = func => prom(client[func]);

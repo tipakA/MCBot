@@ -16,7 +16,6 @@ async function command(client, username, args) { /* eslint-disable-line no-unuse
   client.chat('/scoreboard objectives add deaths deathCount "Death count"');
   client.chat('/scoreboard objectives add timespent dummy "Time spent"');
   await wait(50);
-  client.chat('/scoreboard objectives setdisplay sidebar timespent');
 
   client.chat('/scoreboard players set @a deaths 0');
   client.chat('/scoreboard players set @a timespent 0');
