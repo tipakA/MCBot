@@ -1,5 +1,6 @@
 async function event(client) { /* eslint-disable-line no-unused-vars */
   const keys = await client.redis.keys('mc:playertime:*');
+  if (!client.onlineCache.size) return;
   for (const key of keys) {
     const nickname = key.split(':')[2];
     if (nickname === client.config.nickname) continue;
@@ -7,6 +8,7 @@ async function event(client) { /* eslint-disable-line no-unused-vars */
 
     client.chat(`/scoreboard players set ${nickname} timespent ${Math.floor(parseInt(time) / 1000)}`);
   }
+  client.onlineCache.clear();
 }
 
 module.exports = {

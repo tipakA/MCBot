@@ -17,6 +17,7 @@ async function event(client, playerData) { /* eslint-disable-line no-unused-vars
         data.offset -= 1000; // subtract that second from sum of offsets
       }
 
+      client.onlineCache.add(nickname);
       client.onlinePlayers.set(nickname, data);
       await client.redis.set(`mc:playertime:${nickname}`, data.time); // store accurate time in redis
     }

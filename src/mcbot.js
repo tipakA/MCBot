@@ -26,6 +26,7 @@ async function main() {
   client.trackingEnabled = true;
   client.startPoint = null;
 
+  client.onlineCache = new Set();
   client.onlinePlayers = new Collection();
   client.intervals = new Collection();
 
