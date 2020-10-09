@@ -9,6 +9,7 @@ async function event(client, player) { /* eslint-disable-line no-unused-vars */
   data.time = Number(redisPlayerTime) || 0;
   data.lastCheck = Date.now();
   data.offset = data.time % 1000;
+  client.onlineCache.add(player.username);
   client.onlinePlayers.set(player.username, data);
 }
 
